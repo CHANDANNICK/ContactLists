@@ -23,12 +23,27 @@ var contactList = [
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 app.use(express.urlencoded());
+app.use(express.static("assets"));
 
 app.get("/", function (req, res) {
   res.render("home", {
     TITLE: "I am Nick",
     contact_list: contactList,
   });
+});
+app.get("/tense", function (req, res) {
+  return res.render("tense");
+});
+
+//? Delete Contacts////////////////////
+
+app.get("/delete-contact", function (req, res) {
+  let phone = req.query.phone;
+  let contactIndex = contactList.findIndex((contact) => contact.phone == phone);
+  if (contactIndex != -1) {
+    contactList.splice(contactIndex, 1);
+  }
+  return res.redirect("back");
 });
 
 app.post("/create-contact", function (req, res) {

@@ -1,32 +1,103 @@
 <!DOCTYPE html>
 <html lang="en">
 
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>
-            <%= TITLE %>
-        </title>
-    </head>
+  <head>
+    <title>
+      <%= TITLE %>
+    </title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Material Design for Bootstrap</title>
 
-    <body>
-        <ul>
-            <% for( let i of contact_list ) { %>
-            <li>
-                <p><%= i.name %> </p>
-                <p><%= i.phone %> </p>
-            </li>
-            <% } %>
-        </ul>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="css/fontawesome.css">
+    <link rel="stylesheet" href="css/all.css">
+    <link rel="stylesheet" href="css/duotone.css">
 
-        <form action="/create-contact" method="POST">
-            <input type="text" name="name" placeholder="Enter Your Name" required>
-            <input type="number" name="phone" placeholder="Enter Your Number" required>
-            <button type="submit">Add New</button>
-        </form>
+    <!-- Google Fonts Roboto -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <!-- Material Design Bootstrap -->
+    <link rel="stylesheet" href="css/mdb.min.css">
+    <!-- Your custom styles (optional) -->
+    <link rel="stylesheet" href="css/style.css">
+  </head>
+
+  <body>
+
+
+    <!-- Start your project here-->
+    <div class="row">
+      <div class="col-md-6">
+        <div class="m-5">
+          <div class="card m-2 m-auto" style="width: 22rem;margin: 0 auto;float: none; margin-bottom: 10px;">
+            <h1 class="m-auto"><i class="fad fa-address-card"
+                style="--fa-primary-color: rgb(252, 252, 252); --fa-secondary-color:rgb(3, 123, 235); --fa-secondary-opacity: 1.0;"></i>My
+              Contacts List</h1>
+          </div>
+          <div class="card m-5 m-auto" style="width: 22rem;margin: 0 auto;float: none; margin-bottom: 10px;">
+
+
+            <ol class="list-group list-group-flush">
+              <% for( let i of contact_list ) { %>
+              <li class="list-group-item"
+                style="display: flex;justify-content: space-between;background-color: rgb(18, 54, 102);color: rgb(255, 255, 255);margin-top: 1px;">
+                <div style="display: contents;">
+                  <p><%= i.name %> </p>
+                  <p><%= i.phone %> </p>
+                </div>
+                <div>
+                  <a href="/delete-contact/?phone=<%= i.phone %>" style="color:red;"><i class="fad fa-trash"></i></a>
+
+                </div>
+
+              </li>
+              <% } %>
+            </ol>
+          </div>
+        </div>
+
+      </div>
+      <div class="col-md-6">
+        <div class="card m-5 mx-auto" style="width: 22rem;margin: 0 auto;float: none; margin-bottom: 10px;">
+
+          <div class="card-body px-lg-5 pt-0">
+
+            <form action="/create-contact" method="POST" class="md-form" style="color: #757575;">
 
 
 
-    </body>
+              <input type="text" name="name" id="materialSaveFormName" class="form-control" placeholder="Name" required>
+              <input type="text" name="phone" id="materialSaveFormPhone" class="form-control"
+                placeholder="Mobile Number" required>
+
+
+
+              <button class="btn btn-outline-info btn-rounded btn-block z-depth-0 my-4 waves-effect"
+                type="submit">Save</button>
+
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- End your project here-->
+
+    <!-- jQuery -->
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <!-- Bootstrap tooltips -->
+    <script type="text/javascript" src="js/popper.min.js"></script>
+    <!-- Bootstrap core JavaScript -->
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <!-- MDB core JavaScript -->
+    <script type="text/javascript" src="js/mdb.min.js"></script>
+    <!-- Your custom scripts (optional) -->
+    <script type="text/javascript"></script>
+
+  </body>
 
 </html>
