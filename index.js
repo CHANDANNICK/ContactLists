@@ -26,32 +26,49 @@ app.set("views", path.join(__dirname, "views"));
 app.use(express.urlencoded());
 app.use(express.static("assets"));
 
+//Fetch Data From DB
 app.get("/", function (req, res) {
-  res.render("home", {
-    TITLE: "I am Nick",
-    contact_list: contactList,
+  Contact.find({}, function (err, contacts) {
+    if (err) {
+      console.log("Error in Fetching Data");
+    }
+    res.render("home", {
+      TITLE: "Contact List",
+      contact_list: contacts,
+    });
   });
 });
-app.get("/tense", function (req, res) {
-  return res.render("tense");
-});
 
-//? Delete Contacts////////////////////
-
+//! Delete Contacts////////////////////
 app.get("/delete-contact", function (req, res) {
-  let phone = req.query.phone;
-  let contactIndex = contactList.findIndex((contact) => contact.phone == phone);
-  if (contactIndex != -1) {
-    contactList.splice(contactIndex, 1);
-  }
-  return res.redirect("back");
+  let id = req.query.id;
+  Contact.findByIdAndDelete(id, function (err) {
+    if (err) {
+      console.log("Error in deleting Contact");
+    }
+    return res.redirect("back");
+  });
 });
 
+//Create Contact Controller
 app.post("/create-contact", function (req, res) {
-  contactList.push(req.body);
-  return res.redirect("back");
+  // contactList.push(req.body);
+  Contact.create(
+    {
+      name: req.body.name,
+      phone: req.body.phone,
+    },
+    function (err, newContact) {
+      if (err) {
+        console.log("Error in creating new contact");
+      }
+      console.log("Successfully Created new Contact", newContact);
+      return res.redirect("back");
+    }
+  );
 });
 
+//Server Status
 app.listen(port, function (err) {
   if (err) {
     console.log("Error in running server", err);

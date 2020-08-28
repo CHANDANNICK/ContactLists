@@ -13,7 +13,6 @@ const contactSchema = new mongoose.Schema({
   },
 });
 
-//Assining name to the model which will be seen as collection in DB
 const Contact = mongoose.model("Contact", contactSchema);
 
 //Exporting out model
