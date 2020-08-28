@@ -43,13 +43,15 @@
             <ol class="list-group list-group-flush">
               <% for( let i of contact_list ) { %>
               <li class="list-group-item"
-                style="display: flex;justify-content: space-between;background-color: rgb(18, 54, 102);color: rgb(255, 255, 255);margin-top: 1px;">
+                style="display: flex;justify-content: space-between;background-color: rgb(96, 100, 105);color: rgb(243, 239, 10);margin-top: 1px;">
                 <div style="display: contents;">
-                  <p><%= i.name %> </p>
+                  <p style="text-transform: capitalize;"><%= i.name %> </p>
                   <p><%= i.phone %> </p>
                 </div>
                 <div>
-                  <a href="/delete-contact/?phone=<%= i.phone %>" style="color:red;"><i class="fad fa-trash"></i></a>
+                  <a href="/delete-contact/?phone=<%= i.phone %>" style="color:red;"><i
+                      class="fad fa-trash  material-tooltip-main" data-toggle="tooltip" data-placement="top"
+                      title="Delete"></i></a>
 
                 </div>
 
